@@ -1,0 +1,28 @@
+Modelo Relacional Proyecto Integrado
+
+Usuario(Nombre, Apellido, Email, Contraseña, Nº Usuario)
+CP {Nº Usuario}
+
+Compra(Nº Usuario, ID)
+CP {Nº Usuario, ID}
+CA {ID --> Piezas}
+CA {Nº Usuario --> Usuario}
+
+Piezas(Nombre, ID, Marca, Precio, Cant.Tienda, Cant. RecomTienda)
+CP{ID}
+
+Pide(Nº Trajador, ID)
+CP {Nº Trabajador, ID}
+CA {ID --> Piezas}
+CA {Nº Trabajador --> Trabajador}
+
+Trabajador(Nombre, Apellido, Email, Contraseña, Nº Trabajador, DNI)
+CP {Nº Trabajador}
+
+Supervisor(Nombre, Apellido, Email, Contraseña, Nº Supervisor, DNI)
+CP {Nº Supervisor}
+CA {Nº Trabajador --> Trabajador}
+
+Comprueba(Nº Supervisor, ID)
+CA {ID --> Piezas}
+CA {Nº Supervisor --> Supervisor}
