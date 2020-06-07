@@ -1,4 +1,5 @@
 package TFG;
+import java.sql.*;
 
 public class Supervisor extends Trabajador{
 	

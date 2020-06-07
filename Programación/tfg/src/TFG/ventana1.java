@@ -1,5 +1,9 @@
 package TFG;
+import javax.swing.table.*;
+import java.sql.*;
+
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,10 +27,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JTree;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JComboBox;
 
 public class ventana1 extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -57,19 +66,30 @@ public class ventana1 extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 931, 592);
+		setBounds(100, 100, 849, 609);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("VOLVER ATR\u00C1S");
-		btnNewButton.setBackground(Color.GRAY);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Identificacion ident = new Identificacion();
+					ident.setVisible(true);
+					ventana1.this.setVisible(false);
+
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnNewButton.setBackground(new Color(233, 150, 122));
 		btnNewButton.setBounds(10, 11, 172, 46);
 		contentPane.add(btnNewButton);
 		
 		JButton btnCerrar = new JButton("CERRAR");
+		btnCerrar.setForeground(new Color(224, 255, 255));
 		btnCerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int int1 = JOptionPane.showConfirmDialog(ventana1.this, "¿Desea salir?");
@@ -83,20 +103,14 @@ public class ventana1 extends JFrame {
 				
 			}
 		});
-		btnCerrar.setBackground(Color.GRAY);
-		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnCerrar.setBounds(733, 11, 172, 46);
+		btnCerrar.setBackground(new Color(178, 34, 34));
+		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 21));
+		btnCerrar.setBounds(651, 10, 172, 46);
 		contentPane.add(btnCerrar);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setForeground(Color.BLACK);
-		scrollBar.setBackground(Color.BLACK);
-		scrollBar.setBounds(403, 80, 17, 358);
-		contentPane.add(scrollBar);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.GRAY);
-		panel.setBounds(50, 80, 354, 34);
+		panel.setBounds(67, 109, 354, 34);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -105,62 +119,106 @@ public class ventana1 extends JFrame {
 		lblProductos.setBounds(17, 8, 88, 19);
 		panel.add(lblProductos);
 		
-		JButton btnNewButton_1 = new JButton("DECKS");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setBounds(458, 127, 128, 40);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_1_1 = new JButton("RUEDAS");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1_1.setBounds(585, 127, 128, 40);
-		contentPane.add(btnNewButton_1_1);
-		
-		JButton btnNewButton_1_2 = new JButton("EJES");
-		btnNewButton_1_2.setBounds(712, 127, 128, 40);
-		contentPane.add(btnNewButton_1_2);
-		
-		JButton btnNewButton_1_3 = new JButton("TORNILLOS");
-		btnNewButton_1_3.setBounds(458, 166, 128, 40);
-		contentPane.add(btnNewButton_1_3);
-		
-		JButton btnNewButton_1_4 = new JButton("RODAMIENTOS");
-		btnNewButton_1_4.setBounds(585, 166, 128, 40);
-		contentPane.add(btnNewButton_1_4);
-		
-		JButton btnNewButton_1_5 = new JButton("LIJAS");
-		btnNewButton_1_5.setBounds(712, 166, 128, 40);
-		contentPane.add(btnNewButton_1_5);
-		
 		JButton btnNewButton_2 = new JButton("LISTA PEDIDO");
+		btnNewButton_2.setBackground(new Color(175, 238, 238));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaPedido listped = new ListaPedido();
+				listped.setVisible(true);
+				ventana1.this.setVisible(false);
+			}
+		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton_2.setBounds(570, 455, 240, 63);
+		btnNewButton_2.setBounds(503, 403, 240, 63);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_2_1 = new JButton("A\u00D1ADIR PRODUCTO");
+		btnNewButton_2_1.setBackground(new Color(175, 238, 238));
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Producto prod = new Producto();
+				prod.setVisible(true);
+				ventana1.this.setVisible(false);
+			}
+		});
 		btnNewButton_2_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton_2_1.setBounds(570, 339, 240, 63);
+		btnNewButton_2_1.setBounds(67, 403, 240, 63);
 		contentPane.add(btnNewButton_2_1);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(50, 112, 354, 326);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(67, 142, 354, 204);
+		contentPane.add(scrollPane);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(0, 0, 163, 34);
-		panel_1.add(panel_2);
-		panel_2.setLayout(null);
+		DefaultTableModel modelo = new DefaultTableModel();
+		table = new JTable(modelo);
 		
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(10, 11, 143, 14);
-		panel_2.add(lblNombre);
+		modelo.addColumn("Nombre");
+		modelo.addColumn("Stock en tienda");
+		modelo.addColumn("Rec  en tienda");
+		
+		scrollPane.setViewportView(table);
+		
+		String[] piezas = {"Tornillos", "Decks", "Lijas", "Ruedas", "Rodamientos", "Ejes"};
+		JComboBox comboBox = new JComboBox(piezas);
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		comboBox.setBounds(519, 116, 205, 56);
+		contentPane.add(comboBox);
+		
+		JButton btnPiezas = new JButton("CARGAR");
+		btnPiezas.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnPiezas.setBackground(new Color(173, 216, 230));
+		btnPiezas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				modelo.setRowCount(0);
+				String valor1 = null;
+				
+				String item = (String)comboBox.getSelectedItem();
+				switch (item) {
+				case "Tornillos": valor1 = "'T%'";
+				break;
+				case "Decks": valor1 = "'D%'";
+				break;
+				case "Lijas": valor1 = "'L%'";
+				break;
+				case "Ruedas": valor1 = "'Ru%'";
+				break;
+				case "Rodamientos": valor1 = "'Ro%'";
+				break;
+				case "Ejes": valor1 = "'E%'";
+				break;
+				}
+				
+				Conexion cn = new Conexion();
+				Connection miConexion = cn.getCn();
+				
+				Statement st;
+				try {
+					st = miConexion.createStatement();
+					String s = "SELECT Nombre, Cant_Tienda, Cant_RecomTienda FROM piezas WHERE Nombre LIKE " + valor1;
+					System.out.println(s);
+					ResultSet rsPiezas = st.executeQuery(s);
+					
+					Object [] fila = new Object[3];
+					
+					while(rsPiezas.next()) {
+						
+						fila[0] = rsPiezas.getString("Nombre");
+						fila[1] = rsPiezas.getInt("Cant_Tienda");
+						fila[2] = rsPiezas.getInt("Cant_RecomTienda");
+						modelo.addRow(fila);
+					}
+					
+					rsPiezas.close();
+					
+				} catch (SQLException w) {
+					w.printStackTrace();
+				}
+			}
+		});
+		btnPiezas.setBounds(525, 236, 192, 92);
+		contentPane.add(btnPiezas);
+		
+
 	}
 }
